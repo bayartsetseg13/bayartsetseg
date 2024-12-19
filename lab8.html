@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математикийн Тооцоолол</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section button {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .section button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Математикийн Тооцоолол</h1>
+    <div class="container">
+        <!-- Цифрүүдийн нийлбэр палиндром эсэх -->
+        <div class="section">
+            <h2>1. Цифрүүдийн нийлбэр палиндром эсэх</h2>
+            <input type="number" id="palindromeNumber" placeholder="Тоог оруулна уу">
+            <button onclick="checkPalindrome()">Шалгах</button>
+            <p class="result" id="palindromeResult"></p>
+        </div>
+        <!-- Чоно туулайг гүйцэх хугацаа -->
+        <div class="section">
+            <h2>2. Чоно туулайг гүйцэх хугацаа</h2>
+            <input type="number" id="distance" placeholder="Зайг оруулна уу (км)">
+            <button onclick="calculateCatchTime()">Тооцоолох</button>
+            <p class="result" id="catchResult"></p>
+        </div>
+        <!-- Байшин доторх байрлал -->
+        <div class="section">
+            <h2>3. Байршлын тооцоолол</h2>
+            <input type="number" id="apartmentNumber" placeholder="Тоотыг оруулна уу">
+            <button onclick="findApartment()">Тооцоолох</button>
+            <p class="result" id="apartmentResult"></p>
+        </div>
+        <!-- Хамгийн бага ерөнхий хуваагдагч -->
+        <div class="section">
+            <h2>4. Хамгийн бага ерөнхий хуваагдагч</h2>
+            <input type="text" id="arrayNumbers" placeholder="5 тоог зайгаар тусгаарлан оруулна уу">
+            <button onclick="findLCM()">Тооцоолох</button>
+            <p class="result" id="lcmResult"></p>
+        </div>
+        <!-- Өглөө орой тооцоолол -->
+        <div class="section">
+            <h2>5. Өглөө ба Орой</h2>
+            <div>
+                <h3>Өглөө:</h3>
+                <input type="number" id="morningNumber" placeholder="Тоог оруулна уу">
+                <button onclick="calculateSquare()">2 зэрэг</button>
+                <p class="result" id="morningResult"></p>
+            </div>
+            <div>
+                <h3>Орой:</h3>
+                <input type="number" id="eveningNumber" placeholder="Тоог оруулна уу">
+                <button onclick="calculateSquareRoot()">Язгуур</button>
+                <p class="result" id="eveningResult"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Цифрүүдийн нийлбэр палиндром эсэхийг шалгах
+        function checkPalindrome() {
+            const num = document.getElementById("palindromeNumber").value;
+            const sum = String(num).split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+            const isPalindrome = String(sum) === String(sum).split('').reverse().join('');
+            document.getElementById("palindromeResult").innerText = isPalindrome 
+                ? `Цифрүүдийн нийлбэр (${sum}) палиндром мөн.` 
+                : `Цифрүүдийн нийлбэр (${sum}) палиндром биш.`;
+        }
+
+        // 2. Чоно туулайг гүйцэх хугацаа
+        function calculateCatchTime() {
+            const distance = parseFloat(document.getElementById("distance").value);
+            const wolfSpeed = 25, rabbitSpeed = 18;
+            if (wolfSpeed <= rabbitSpeed) {
+                document.getElementById("catchResult").innerText = "Чоно туулайг гүйцэх боломжгүй.";
+                return;
+            }
+            const relativeSpeed = wolfSpeed - rabbitSpeed;
+            const timeInHours = distance / relativeSpeed;
+            const minutes = Math.floor(timeInHours * 60);
+            const seconds = Math.floor((timeInHours * 3600) % 60);
+            document.getElementById("catchResult").innerText = `${minutes} минут ${seconds} секундийн дараа гүйцнэ.`;
+        }
+
+        // 3. Байршлын тооцоолол
+        function findApartment() {
+            const flat = parseInt(document.getElementById("apartmentNumber").value);
+            const flatsPerEntrance = 9 * 4;
+            const entrance = Math.ceil(flat / flatsPerEntrance);
+            const remainingFlats = (flat - 1) % flatsPerEntrance;
+            const floor = Math.floor(remainingFlats / 4) + 1;
+            const door = (remainingFlats % 4) + 1;
+            document.getElementById("apartmentResult").innerText = `${entrance}-р орц, ${floor}-р давхар, ${door}-р хаалга.`;
+        }
+
+        // 4. Хамгийн бага ерөнхий хуваагдагч
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+        function lcm(a, b) {
+            return (a * b) / gcd(a, b);
+        }
+        function findLCM() {
+            const numbers = document.getElementById("arrayNumbers").value.split(' ').map(Number);
+            const result = numbers.reduce((acc, num) => lcm(acc, num), 1);
+            document.getElementById("lcmResult").innerText = `Хамгийн бага ерөнхий хуваагдагч: ${result}`;
+        }
+
+        // 5. Өглөө ба орой тооцоолол
+        function calculateSquare() {
+            const num = document.getElementById("morningNumber").value;
+            document.getElementById("morningResult").innerText = `Хариу: ${Math.pow(num, 2)}`;
+        }
+
+        function calculateSquareRoot() {
+            const num = document.getElementById("eveningNumber").value;
+            document.getElementById("eveningResult").innerText = `Хариу: ${Math.sqrt(num).toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

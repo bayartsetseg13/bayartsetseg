@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+  .deedtal {
+    height: 200px;
+    width: 200px;
+    background-color: green;
+    float: left;
+  }
+  .doodtal {
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+</style> 
+
+<script>
+
+
+ 
+
+var string=prompt('Neree oruulna uu?');
+var q=0;
+for (var i = 0; i < string.length; i++) {   
+  if (string[i] === string[string.length - 1 - i]) {  
+     q++;
+  }  
+}  
+if(q===string.length) alert('Palindrom mun');
+else alert( 'Palindrom bish');   
+
+
+var too=prompt('Ymar negen too oruulna uu');
+var s=0;
+var urt=too.length;
+for (i=0; i<urt; i++) {
+  s=s+(too%10);
+  too=parseInt(too/10);
+}
+alert(`Niilber ni ${s}`);
+
+alert('Чоно 25 км/ц хурдтай, туулай 18 км/ц хурдтай. Гараас өгсөн зайтай байхад хэдэн минут хэдэн секундын дараа гэхэд гүйцэх вэ');
+var zai=prompt('Zaigaa ugnu uu(metr)');
+var chono=25000/3600;
+var tuulai=18000/3600;
+var zuruu=25000/3600-18000/3600;
+var sec=zai/zuruu;
+if(sec>=60){
+  var min=parseInt(sec/60);
+  if(min>=60) {
+    var tsag=parseInt(sec/3600);
+    var sec=sec/3600;
+    var min =parseInt(sec/60);
+    var sec=parseInt(sec%60);
+    alert(`${tsag}ts ${min}m ${sec}s daraa barij idne`);
+  }
+  else var sec=parseInt(sec%60);
+alert(`${min}m ${sec}s daraa barij idne`);}
+else if(sec>60){
+  var sec=parseInt(sec%60);
+  alert(`${sec}s daraa barij idne`);}
+
+
+
+var toot=prompt('Tootoo oruulna uu(108)');
+var davhar=0,ail=0;
+if(toot<36 && toot>=1) {
+    alert('1r orts'); 
+    davhar=parseInt(toot/4);
+    ail=toot-(davhar*4);
+    if(ail==0) {
+      ail=4;
+    }
+    alert(`${davhar} davhariin ${ail}r ail`);
+}
+else if(toot>72 && toot<=108) {
+    alert('3r orts'); 
+    toot=toot-72;
+    davhar=parseInt(toot/4);
+    ail=toot-(davhar*4);
+    if(ail==0) {
+      ail=4;
+    }
+    alert(`${davhar} davhariin ${ail}r ail`);
+}
+else if(toot>=36 && toot<=72){
+    alert('2r orts'); 
+    toot=toot-36;
+    davhar=parseInt(toot/4);
+    ail=toot-(davhar*4);
+    if(ail==0) {
+      ail=4;
+    }
+    alert(`${davhar} davhariin ${ail}r ail`);
+}
+else alert('Buruu toot oruulsan baina')
+
+var now  = new Date();        
+var hour  = now.getHours();  
+if(hour>=5 && hour<=13) document.write('<div class="deedtal"></div>')
+else document.write('<div class="doodtal"></div>')
+
+
+
+
+</script>
+
+</body>
+</html>

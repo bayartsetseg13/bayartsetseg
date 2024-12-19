@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+#newsList h2 {
+    margin-bottom: 10px;
+}
+
+#newsContainer {
+    list-style: none;
+    padding: 0;
+}
+
+#newsContainer li {
+    margin: 10px 0;
+}
+
+#newsContainer li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+#newsContainer li a:hover {
+    text-decoration: underline;
+}

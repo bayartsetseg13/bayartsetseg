@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сонгодог амттан (desserts)</title>
+    <link rel="stylesheet" href="style0.css">
+</head>
+<body>
+    <header>
+        <h1>Сонгодог амттан (desserts)</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Нүүр</a></li>
+                <li><a href="#recipes">Жорууд</a></li>
+                <li><a href="#contact">Холбоо барих</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Хоолны жор хайх -->
+        <section id="search">
+            <h2> жор хайх</h2>
+            <input type="text" id="searchInput" placeholder="Жорын нэрээр хайх...">
+            <button onclick="searchRecipe()">Хайх</button>
+        </section>
+
+        <!-- Хоолны жорын жагсаалт -->
+        <section id="recipes">
+            <h2>Сонгодог амттан (desserts)</h2>
+            <div class="recipe-list">
+                <div class="recipe-item">
+                    <h3>шокаладтай пирогны суурь хийх</h3>
+                    <p>Орц: өндөг, сүү, масло , гурил, дээд гурил, элсэн чихэр...</p>
+                    <button onclick="toggleDetails(this)">Дэлгэрэнгүй</button>
+                    <div class="recipe-details" style="display: none;">
+                        <p>Дэлгэрэнгүй жор:</p>
+                        <ul>
+                            <li>өндөгний шар 2 ширхэг</li>
+                            <li>өндөг 2 ширхэг</li>
+                            <li>үнээний сүү 50гр</li>
+                            <li>масло 150гр</li>
+                            <li>гурил 100 гр</li>
+                            <li>дээд гурил 300гр</li>
+                            <li>элсэн чихэр 200гр</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recipe-item">
+                    <h3>хар, цагаан шокаладтай пирог</h3>
+                    <p>Орц: хар шокаладтай 40гр, Сүү 100гр, масло 35гр, Желатин 7гр, шингэн цөцгий 300гр</p>
+                    <button onclick="viewRecipe('Хуушуур')">Дэлгэрэнгүй</button>
+                </div>
+                <div class="recipe-item">
+                    <h3>Цуйван</h3>
+                    <p>Орц: Гоймон, мах, лууван...</p>
+                    <button onclick="toggleDetails(this)">Дэлгэрэнгүй</button>
+                    <div class="recipe-details" style="display: none;">
+                        <p>Дэлгэрэнгүй жор:</p>
+                        <ul>
+                            <li>Гурил: 1 кг</li>
+                            <li>Мах: 500 гр</li>
+                            <li>Сонгино: 2 ш</li>
+                            <li>Давс: Амталгаагаар</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Холбоо барих -->
+        <section id="contact">
+            <h2>Холбоо барих</h2>
+            <form>
+                <label for="name">Таны нэр:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="message">Санал хүсэлт:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Илгээх</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Сонгодог амттан (desserts). Бүх эрх хуулиар хамгаалагдсан.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

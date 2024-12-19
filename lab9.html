@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Тоглоом</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .word-container {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .letter {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 5px;
+            border-bottom: 2px solid #333;
+            width: 30px;
+            text-transform: uppercase;
+        }
+        .hangman-drawing {
+            margin: 20px auto;
+            height: 200px;
+            width: 100px;
+            border: 2px solid #333;
+            position: relative;
+        }
+        .part {
+            display: none;
+            position: absolute;
+            background-color: #333;
+        }
+        .head {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            top: 10px;
+            left: 35px;
+        }
+        .body {
+            width: 10px;
+            height: 50px;
+            top: 40px;
+            left: 45px;
+        }
+        .arm-left {
+            width: 30px;
+            height: 10px;
+            top: 50px;
+            left: 15px;
+            transform: rotate(-45deg);
+        }
+        .arm-right {
+            width: 30px;
+            height: 10px;
+            top: 50px;
+            left: 55px;
+            transform: rotate(45deg);
+        }
+        .leg-left {
+            width: 30px;
+            height: 10px;
+            top: 90px;
+            left: 15px;
+            transform: rotate(-30deg);
+        }
+        .leg-right {
+            width: 30px;
+            height: 10px;
+            top: 90px;
+            left: 55px;
+            transform: rotate(30deg);
+        }
+        .message {
+            font-size: 20px;
+            color: #333;
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hangman Тоглоом</h1>
+    <div class="word-container" id="wordContainer"></div>
+    <div class="hangman-drawing">
+        <div class="part head"></div>
+        <div class="part body"></div>
+        <div class="part arm-left"></div>
+        <div class="part arm-right"></div>
+        <div class="part leg-left"></div>
+        <div class="part leg-right"></div>
+    </div>
+    <p class="message" id="message"></p>
+    <input type="text" id="letterInput" maxlength="1" placeholder="Үсэг оруулна уу">
+    <button onclick="guessLetter()">Таах</button>
+
+    <script>
+        const words = ["javascript", "hangman", "developer", "responsive", "design"];
+        let chosenWord = words[Math.floor(Math.random() * words.length)];
+        let guessedLetters = [];
+        let lives = 5;
+
+        const wordContainer = document.getElementById("wordContainer");
+        const message = document.getElementById("message");
+        const parts = document.querySelectorAll(".part");
+
+        function displayWord() {
+            wordContainer.innerHTML = chosenWord
+                .split("")
+                .map(letter => (guessedLetters.includes(letter) ? letter : "_"))
+                .map(letter => `<span class="letter">${letter}</span>`)
+                .join("");
+        }
+
+        function guessLetter() {
+            const input = document.getElementById("letterInput").value.toLowerCase();
+            if (!input || guessedLetters.includes(input)) {
+                message.innerText = "Үсэг оруулна уу эсвэл давхардаж байна!";
+                return;
+            }
+
+            guessedLetters.push(input);
+
+            if (chosenWord.includes(input)) {
+                message.innerText = "Зөв таалаа!";
+            } else {
+                message.innerText = "Буруу!";
+                lives--;
+                parts[5 - lives].style.display = "block";
+            }
+
+            displayWord();
+            checkGameStatus();
+            document.getElementById("letterInput").value = "";
+        }
+
+        function checkGameStatus() {
+            if (lives === 0) {
+                message.innerText = `Тоглоом дууслаа! Зөв үг: ${chosenWord}`;
+                document.getElementById("letterInput").disabled = true;
+            } else if (!wordContainer.innerText.includes("_")) {
+                message.innerText = "Баяр хүргэе! Та хожлоо!";
+                document.getElementById("letterInput").disabled = true;
+            }
+        }
+
+        displayWord();
+    </script>
+</body>
+</html>
